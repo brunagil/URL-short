@@ -1,5 +1,5 @@
 // const que guardar a URL temporariamente: https://www.jsonstore.io/ 
-const endPoint = "https://www.jsonstore.io/387a2d29b258fed383609ebf7241f0940a1a9f697f455b3bb9ce4e65c668a48c";
+// const endPoint = "https://www.jsonstore.io/387a2d29b258fed383609ebf7241f0940a1a9f697f455b3bb9ce4e65c668a48c";
 
 // cria string aleatória que 
 // liga a URL encurtada com a URL longa
@@ -9,23 +9,60 @@ function createRandomString() {
 };
 
 //const do input e do botão
+const button = document.getElementById("urlbutton")
+const input = document.getElementById("urlinput")
 
-const urlButton = document.getElementById("urlbutton")
-const urlInput = document.getElementById("urlinput").value
+button.addEventListener("click", function() {
+    console.log("botão funcionou")
+    console.log(input.value, "valor do input")
+    makeShortUrl()
+})
 
-// pega o valor do input e confere se ele está no formato http
-function getInput() {
-    let protocolIsOk = urlInput.startsWith("http://") || urlInput.startsWith("https://")
+// validação do input: pega o valor do input e confere se ele está no formato http
+function getUrlFromInput() {
+    let urlinput = input.value
+    let protocolIsOk = urlinput.startsWith("http://") || urlinput.startsWith("https://")
         if (!protocolIsOk) {
-            newUrl = `http://${urlInput}`
+            newUrl = `https://${urlinput}`
+            console.log(newUrl, "newUrl")
             return newUrl
         } else {
-            return urlInput
+            console.log(urlinput, "url input")
+            return urlinput
         }
 }
 
-function addHastAtTheURL() {
+function changeHashFromUrl() {
         if (window.location.hash == ''){
             window.location.hash = createRandomString();
+            console.log(changeHashFromUrl(), "function change hash")
+            console.log(createRandomString(), "a string criada")
         }
     }
+
+// guarda a URL longa e chama as funções para modificar a URL
+function makeShortUrl() {
+    let longUrl = getUrlFromInput();
+        changeHashFromUrl();
+        sendRequest(longUrl);
+}
+
+//http request para o https://www.jsonstore.io/
+
+function sendRequest() { 
+    const endpoint = "https://www.jsonstore.io/387a2d29b258fed383609ebf7241f0940a1a9f697f455b3bb9ce4e65c668a48c"
+    const data = {
+        'Content-type': 'application/json',
+        'method': "POST",
+        'url': `${endpoint}${'/'}${window.location.hash.substr(1)}`,
+    }
+        
+    fetch(endpoint, data)
+        .then(data => {
+            return data.json
+        })
+        .catch(error =>
+            console.log(error))
+}
+
+
