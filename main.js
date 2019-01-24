@@ -49,20 +49,31 @@ function makeShortUrl() {
 
 //http request para o https://www.jsonstore.io/
 
-function sendRequest() { 
-    const endpoint = "https://www.jsonstore.io/387a2d29b258fed383609ebf7241f0940a1a9f697f455b3bb9ce4e65c668a48c"
-    const data = {
-        'Content-type': 'application/json',
-        'method': "POST",
-        'url': `${endpoint}${'/'}${window.location.hash.substr(1)}`,
-    }
-        
-    fetch(endpoint, data)
-        .then(data => {
-            return data.json
-        })
-        .catch(error =>
-            console.log(error))
+function sendRequest () {
+    const url = 'https://www.jsonstore.io/387a2d29b258fed383609ebf7241f0940a1a9f697f455b3bb9ce4e65c668a48c'
+    
+    fetch(url)
+        .then(data => {return data.json()})
+        .then(res => {console.log(res)})
+
 }
+
+
+
+// function sendRequest() { 
+//     const url = "https://www.jsonstore.io/4c5314ddfed68a7ce489954a9cf918a7c9a7ed6f47678000ce1d6c3ec0699db8"
+//     const data = {
+//         'Content-type': 'application/json',
+//         'method': "POST",
+//         'url': `${endpoint}${'/'}${window.location.hash.substr(1)}`,
+//     }
+        
+//     fetch(endpoint, data)
+//         .then(data => {
+//             return data.json
+//         })
+//         .catch(error =>
+//             console.log(error))
+// }
 
 
