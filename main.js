@@ -1,6 +1,3 @@
-// const que guardar a URL temporariamente: https://www.jsonstore.io/ 
-// const endPoint = "https://www.jsonstore.io/387a2d29b258fed383609ebf7241f0940a1a9f697f455b3bb9ce4e65c668a48c";
-
 // cria string aleatória que 
 // liga a URL encurtada com a URL longa
 function createRandomString() {
@@ -57,8 +54,6 @@ function sendRequest () {
         .then(res => {console.log(res)})
 
 }
-
-
 
 // function sendRequest() { 
 //     const url = "https://www.jsonstore.io/4c5314ddfed68a7ce489954a9cf918a7c9a7ed6f47678000ce1d6c3ec0699db8"
